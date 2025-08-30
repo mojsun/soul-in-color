@@ -2,7 +2,7 @@ import siteConfig from "@/lib/siteConfig";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t border-accent/60 bg-accent text-foreground mt-16">
+    <footer className="w-full border-t border-brand/40 bg-brand text-white mt-16">
       <div className="mx-auto max-w-6xl px-4 py-8 grid gap-2 sm:grid-cols-3 items-center">
         <div className="text-sm">© {new Date().getFullYear()} {siteConfig.companyName}</div>
         <div className="text-sm text-center">

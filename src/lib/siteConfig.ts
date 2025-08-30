@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = {
       "161 Roehampton Avenue",
       "Toronto, ON M4P 0C8",
     ],
-    ctaText: "Get Tickets on Eventbrite",
+    ctaText: "Tickets",
   },
   socials: {
     instagram: "https://www.instagram.com/soul.in.colour/",
