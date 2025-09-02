@@ -9,16 +9,16 @@ export default function Home() {
         <div className="absolute inset-0 -z-10 bg-[url('/images/horizantally-poster.jpeg')] bg-cover bg-center opacity-20"></div>
         <div className="mx-auto max-w-6xl px-4 py-16 sm:py-24 grid gap-8 sm:grid-cols-2 items-center">
           <div>
-            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-brand">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-[#8F79A1]">
               {siteConfig.event.name}
             </h1>
             <p className="text-lg text-gray-700 mb-6 max-w-prose">
               {siteConfig.event.description}
             </p>
             <ul className="space-y-1 text-base">
-              <li><span className="font-semibold text-brand">Date:</span> {siteConfig.event.date}</li>
-              <li><span className="font-semibold text-brand">Time:</span> {siteConfig.event.time}</li>
-              <li><span className="font-semibold text-brand">Location:</span> {siteConfig.event.location}</li>
+              <li><span className="font-semibold text-[#472f5b]">Date:</span> {siteConfig.event.date}</li>
+              <li><span className="font-semibold text-[#472f5b]">Time:</span> {siteConfig.event.time}</li>
+              <li><span className="font-semibold text-[#472f5b]">Location:</span> {siteConfig.event.location}</li>
             </ul>
             <div className="mt-8 flex gap-4">
               <a

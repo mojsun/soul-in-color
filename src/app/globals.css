@@ -4,9 +4,9 @@
   --background: #ffffff;
   --foreground: #0f172a; /* slate-900 */
 
-  /* Brand palette (updated) */
-  --brand-primary: #020373; /* Deep indigo (assumed correction of #0203732) */
-  --brand-secondary: #715c83; /* Muted purple */
+  /* Brand palette (updated per request) */
+  --brand-primary: #314641; /* Updated primary */
+  --brand-secondary: #472f58; /* Updated secondary */
   --brand-accent: #0CCA98; /* Caribbean Green */
 }
 
@@ -29,6 +29,11 @@
   }
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
@@ -43,7 +48,7 @@ img, svg, video, canvas {
 
 /* Utility helpers */
 .button-brand {
-  @apply inline-flex items-center rounded-full bg-accent text-brand px-6 py-3 font-medium hover:bg-accent/90 transition-colors;
+  @apply inline-flex items-center rounded-full bg-brand-dark text-white px-6 py-3 font-medium hover:bg-brand-dark/90 transition-colors;
 }
 .button-outline-brand {
   @apply inline-flex items-center rounded-full border border-brand text-brand px-6 py-3 font-medium hover:bg-brand/5 transition-colors;
