@@ -9,7 +9,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="mx-auto max-w-3xl px-4 py-16">
-      <h1 className="text-3xl font-bold tracking-tight mb-6 text-brand">About {siteConfig.companyName}</h1>
+      <h1 className="text-3xl font-bold tracking-tight mb-6 text-brand-dark">About {siteConfig.companyName}</h1>
       <p className="text-lg leading-relaxed mb-6">
         {siteConfig.companyName} hosts creative gatherings and workshops that welcome all skill levels. Our mission is to help people slow down, connect, and express themselves through color, intuition, and community.
       </p>
@@ -19,10 +19,11 @@ export default function AboutPage() {
 
       <div className="relative aspect-[16/9] w-full rounded-lg overflow-hidden border border-brand/20 mb-8">
         <Image
-          src="/images/woman-painting.jpeg"
+          src="/images/5.jpg"
           alt="Guests painting during a Soul in Colour workshop"
           fill
           className="object-cover"
+          style={{ objectPosition: "50% 20%" }}
           sizes="(max-width: 768px) 100vw, 768px"
           priority
         />

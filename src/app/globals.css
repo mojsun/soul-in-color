@@ -53,3 +53,19 @@ img, svg, video, canvas {
 .button-outline-brand {
   @apply inline-flex items-center rounded-full border border-brand text-brand px-6 py-3 font-medium hover:bg-brand/5 transition-colors;
 }
+
+/* Home marquee */
+.marquee { display: flex; align-items: center; gap: 0.5rem; width: max-content; animation: home-scroll 30s linear infinite; }
+.marquee:hover { animation-play-state: paused; }
+@keyframes home-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* Hero title animation */
+.hero-title {
+  animation: hero-pulse 3s ease-in-out infinite;
+  text-shadow: 0 0 10px rgba(255,255,255,0.6), 0 0 20px rgba(255,255,255,0.3);
+}
+@keyframes hero-pulse {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,255,255,0.0)); }
+  50% { transform: scale(1.5); filter: drop-shadow(0 0 12px rgba(255,255,255,0.8)); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(255,255,255,0.0)); }
+}

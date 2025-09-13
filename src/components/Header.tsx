@@ -49,6 +49,7 @@ export default function Header() {
         <nav className="flex items-center gap-2 sm:gap-4">
           <Link href="/" className="hover:underline underline-offset-4 hover:opacity-90 text-[#8F79A1] text-xs sm:text-sm">Home</Link>
           <Link href="/about" className="hover:underline underline-offset-4 hover:opacity-90 text-[#8F79A1] text-xs sm:text-sm">About</Link>
+          <Link href="/events" className="hover:underline underline-offset-4 hover:opacity-90 text-[#8F79A1] text-xs sm:text-sm">Events</Link>
           <a
             href={siteConfig.eventbriteUrl}
             target="_blank"
