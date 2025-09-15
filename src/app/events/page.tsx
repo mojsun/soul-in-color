@@ -6,12 +6,21 @@ import VideoGallery from "@/components/VideoGallery";
 
 export default function EventsPage() {
   const videosDir = path.join(process.cwd(), "public", "videos");
-  let videos: string[] = [];
+  const imagesDir = path.join(process.cwd(), "public", "images");
+  let media: string[] = [];
   try {
-    const entries = fs.readdirSync(videosDir);
-    videos = entries
+    const vEntries = fs.readdirSync(videosDir);
+    const videos = vEntries
       .filter((name) => /\.(mp4|webm|mov|MOV)$/i.test(name))
       .map((name) => `/videos/${name}`);
+    media = media.concat(videos);
+  } catch {}
+  try {
+    const iEntries = fs.readdirSync(imagesDir);
+    const images = iEntries
+      .filter((name) => /\.(png|jpe?g|gif|webp)$/i.test(name))
+      .map((name) => `/images/${name}`);
+    media = media.concat(images);
   } catch {}
 
   return (
@@ -45,7 +54,7 @@ export default function EventsPage() {
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-brand">Gallery</h2>
-        <VideoGallery videos={videos} />
+        <VideoGallery videos={media} />
       </section>
 
       <div className="pt-6">

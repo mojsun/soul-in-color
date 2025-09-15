@@ -3,15 +3,18 @@
 import { useState, useRef, useEffect } from "react";
 
 export type VideoGalleryProps = {
-  videos: string[]; // public paths like /videos/xyz.mp4
+  videos: string[]; // public paths to media: can be images or videos
 };
+
+function isVideoPath(src: string): boolean {
+  return /\.(mp4|webm|mov)$/i.test(src);
+}
 
 export default function VideoGallery({ videos }: VideoGalleryProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   useEffect(() => {
-    // Pause all when unhovering everything
     if (hoveredIndex === null) {
       videoRefs.current.forEach((v) => {
         if (v) {
@@ -53,6 +56,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
       {items.map((src, idx) => {
         const isHovered = hoveredIndex === idx;
         const isDim = hoveredIndex !== null && hoveredIndex !== idx;
+        const isVid = isVideoPath(src);
         return (
           <div
             key={src + idx}
@@ -62,15 +66,24 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
             onMouseEnter={() => handleMouseEnter(idx)}
             onMouseLeave={() => handleMouseLeave(idx)}
           >
-            <video
-              ref={(el) => { videoRefs.current[idx] = el; }}
-              src={src}
-              className="h-full w-full object-cover"
-              muted
-              loop
-              playsInline
-              preload="metadata"
-            />
+            {isVid ? (
+              <video
+                ref={(el) => { videoRefs.current[idx] = el; }}
+                src={src}
+                className="h-full w-full object-cover"
+                muted
+                loop
+                playsInline
+                preload="metadata"
+              />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={src}
+                alt="gallery item"
+                className="h-full w-full object-cover"
+              />
+            )}
           </div>
         );
       })}
