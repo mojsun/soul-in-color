@@ -10,6 +10,24 @@ function isVideoPath(src: string): boolean {
   return /\.(mp4|webm|mov)$/i.test(src);
 }
 
+const EXCLUDED_BASENAMES = new Set([
+  "soulin color .jpeg",
+  "soulin_color2.png",
+  "vertically-poster.jpeg",
+  "horizantally-poster.jpeg",
+  "woman-painting.jpeg",
+]);
+
+function shouldExclude(src: string): boolean {
+  try {
+    const parts = src.split("/");
+    const base = parts[parts.length - 1].toLowerCase();
+    return EXCLUDED_BASENAMES.has(base);
+  } catch {
+    return false;
+  }
+}
+
 export default function VideoGallery({ videos }: VideoGalleryProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
@@ -49,7 +67,7 @@ export default function VideoGallery({ videos }: VideoGalleryProps) {
     setHoveredIndex((prev) => (prev === idx ? null : prev));
   };
 
-  const items = videos.slice(0, 16); // 4x4 grid
+  const items = videos.filter((src) => !shouldExclude(src)).slice(0, 16); // 4x4 grid
 
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 overflow-visible">
