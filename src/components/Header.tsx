@@ -22,7 +22,8 @@ export default function Header() {
           <Link href="/" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Home</Link>
           <Link href="/about" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">About</Link>
           <Link href="/events" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Events</Link>
-          <Link href="/events#gallery" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Gallery</Link>
+          <Link href="/gallery" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Gallery</Link>
+          <Link href="/contact" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Contact</Link>
           <a
             href={siteConfig.eventbriteUrl}
             target="_blank"

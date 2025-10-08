@@ -56,7 +56,7 @@ export default function Home() {
 
      
 
-      <section className="w-screen px-0 pt-8 pb-10 space-y-6 bg-brand">
+      <section className="w-screen px-0 pt-8 pb-10 space-y-6" style={{ backgroundColor: "#d7f5e8" }}>
         <h2 className="text-center font-extrabold text-[#8F79A1]" style={{ transform: "scale(2)" }}>Join our upcoming events</h2>
         <div className="overflow-hidden w-full">
           <div className="marquee">
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* Upcoming Shows */}
-      <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
+      <section className="mx-auto max-w-6xl px-4 py-12 space-y-6" style={{ backgroundColor: "#d7f5e8" }}>
         <h2 className="text-3xl font-bold tracking-tight text-brand-dark text-center">Upcoming Shows</h2>
         <article className="rounded-lg border border-gray-300 bg-white/80 p-4 sm:p-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -94,22 +94,7 @@ export default function Home() {
         </article>
       </section>
 
-      {/* Contact Form */}
-      <section className="mx-auto max-w-3xl px-4 py-12">
-        <h2 className="text-3xl font-bold tracking-tight text-brand-dark text-center mb-6">Contact Us</h2>
-        <form className="space-y-4" action="https://formspree.io/f/xqakzqed" method="POST">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="First Name" name="firstName" required />
-            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Last Name" name="lastName" required />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Phone" name="phone" />
-            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Email" type="email" name="email" required />
-          </div>
-          <textarea className="border border-gray-300 rounded-md px-3 py-2 w-full min-h-40" placeholder="Message" name="message" required />
-          <button className="button-brand" type="submit">Send</button>
-        </form>
-      </section>
+      {/* Contact section removed; moved to /contact */}
 
     </main>
   );
