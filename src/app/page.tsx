@@ -8,7 +8,7 @@ export default function Home() {
       <section className="relative mt-0">
         <div className="relative w-full h-[70vh]">
           <Image
-            src="/images/2.jpeg"
+            src="/images/123.jpeg"
             alt="Soul in Colour header"
             fill
             className="object-cover object-center"
