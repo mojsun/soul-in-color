@@ -25,7 +25,7 @@ export default function GalleryPage() {
   } catch {}
 
   return (
-    <main className="min-h-[80vh] mx-auto max-w-6xl px-4 py-12">
+    <main className="min-h-[80vh] mx-auto max-w-6xl px-4 pt-24 pb-16">
       <h1 className="text-3xl font-bold tracking-tight mb-6">Gallery</h1>
       <VideoGallery videos={media} />
     </main>

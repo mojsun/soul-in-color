@@ -8,15 +8,15 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-16">
+    <main className="mx-auto max-w-3xl px-4 pt-24 pb-16">
       <h1 className="text-3xl font-bold tracking-tight mb-6 text-brand-dark">About {siteConfig.companyName}</h1>
       <p className="text-lg leading-relaxed mb-6">
         Soul in Colour is a creative studio, founded by Negar Ronasi (Master of Arts—painting) and Mozhdeh Khorashahi (Master of Architecture). Together, we blend our backgrounds in art and design to create an inspiring space where creativity comes alive.
       </p>
-      <p className="leading-relaxed mb-6">
+      <p className="text-lg leading-relaxed mb-6">
         Through art workshops, teaching, and unique artistic products, our mission is to make art more accessible while building a welcoming community for artists and art lovers. Soul in Colour is not just about painting or creating—it’s about connection, self-expression, and growth.
       </p>
-      <p className="leading-relaxed mb-6">
+      <p className="text-lg leading-relaxed mb-6">
         Whether you join us for a workshop, explore our artistic creations, or simply want to connect with other creatives, Soul in Colour is a place to learn, share, and celebrate the beauty of art together. 🎨✨
       </p>
 
@@ -32,16 +32,7 @@ export default function AboutPage() {
         />
       </div>
 
-      <div className="mt-4">
-        <a
-          href={siteConfig.eventbriteUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="button-brand text-base"
-        >
-          {siteConfig.event.ctaText}
-        </a>
-      </div>
+      {/* Tickets button removed per request */}
     </main>
   );
 } 

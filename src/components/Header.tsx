@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import siteConfig from "@/lib/siteConfig";
 import { usePathname } from "next/navigation";
@@ -7,23 +8,42 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) return;
+    const onScroll = () => {
+      const headerApproxHeight = 80; // px, approximate header height
+      const threshold = Math.max(0, window.innerHeight * 0.7 - headerApproxHeight);
+      setScrolled(window.scrollY > threshold);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
   const headerClassName = `w-full fixed top-0 left-0 right-0 z-50 ${
-    isHome ? "bg-transparent text-black" : "bg-gray-300 border-b border-gray-400 text-gray-900"
+    isHome
+      ? scrolled
+        ? "bg-brand text-white border-b border-brand/40"
+        : "bg-transparent text-black"
+      : "bg-brand text-white border-b border-brand/40"
   }`;
+  const brandTextClass = isHome && !scrolled ? "text-white" : "text-[#8F79A1]";
   return (
     <header className={headerClassName}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-xl sm:text-2xl font-bold tracking-tight text-[#8F79A1]">
+          <span className={`text-xl sm:text-2xl font-bold tracking-tight ${brandTextClass}`}>
             {siteConfig.companyName}
           </span>
         </Link>
         <nav className="flex items-center gap-2 sm:gap-4">
-          <Link href="/" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Home</Link>
-          <Link href="/about" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">About</Link>
-          <Link href="/events" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Events</Link>
-          <Link href="/gallery" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Gallery</Link>
-          <Link href="/contact" className="hover:underline underline-offset-4 hover:opacity-90 text-black text-xs sm:text-sm">Contact</Link>
+          <Link href="/" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Home</Link>
+          <Link href="/about" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>About</Link>
+          <Link href="/events" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Events</Link>
+          <Link href="/gallery" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Gallery</Link>
+          <Link href="/contact" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Contact</Link>
           <a
             href={siteConfig.eventbriteUrl}
             target="_blank"

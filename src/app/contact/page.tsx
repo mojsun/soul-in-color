@@ -1,6 +1,6 @@
 export default function ContactPage() {
   return (
-    <main className="mx-auto max-w-3xl px-4 py-12">
+    <main className="mx-auto max-w-3xl px-4 py-12 min-h-[80vh] pt-32 pb-24">
       <h1 className="text-3xl font-bold tracking-tight text-brand-dark mb-6">Contact Us</h1>
       <form className="space-y-4" action="https://formspree.io/f/xqakzqed" method="POST">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
