@@ -2,10 +2,16 @@
 
 import Link from "next/link";
 import siteConfig from "@/lib/siteConfig";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const headerClassName = `w-full fixed top-0 left-0 right-0 z-50 ${
+    isHome ? "bg-transparent text-black" : "bg-gray-300 border-b border-gray-400 text-gray-900"
+  }`;
   return (
-    <header className="w-full bg-transparent text-black fixed top-0 left-0 right-0 z-50">
+    <header className={headerClassName}>
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-xl sm:text-2xl font-bold tracking-tight text-[#8F79A1]">
