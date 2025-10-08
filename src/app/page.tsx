@@ -68,7 +68,48 @@ export default function Home() {
         </div>
       </section>
 
-      
+      {/* Upcoming Shows */}
+      <section className="mx-auto max-w-6xl px-4 py-12 space-y-6">
+        <h2 className="text-3xl font-bold tracking-tight text-brand-dark text-center">Upcoming Shows</h2>
+        <article className="rounded-lg border border-gray-300 bg-white/80 p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div>
+              <h3 className="text-xl font-bold mb-1">Soul in Colour Presents: Halloween Face Art & Party 🎨🎃</h3>
+              <ul className="text-sm text-gray-700 space-y-1">
+                <li><span className="font-semibold">Date:</span> Thursday, October 30, 2025</li>
+                <li><span className="font-semibold">Time:</span> 7:30 PM – 10:00 PM</li>
+                <li><span className="font-semibold">Location:</span> 161 Roehampton Avenue, Toronto, ON M4P 0C8</li>
+                <li><span className="font-semibold">Age:</span> 18+</li>
+              </ul>
+              <div className="mt-3 text-sm text-gray-700 space-y-1 max-w-prose">
+                <p>Face Painting Workshop – First hour to create your Halloween look.</p>
+                <p>Finger Foods & Games – Enjoy light bites and fun games.</p>
+                <p>Dance & Celebrate – End the evening with music and spooky vibes.</p>
+                <p>Spots are limited – grab your ticket today!</p>
+                <p>647-564-7494 or 437-237-2235 • soul.in.colorr@gmail.com • Instagram: @soul.in.colour</p>
+              </div>
+            </div>
+            <a href={siteConfig.eventbriteUrl} target="_blank" rel="noopener noreferrer" className="button-brand w-fit">Get Tickets</a>
+          </div>
+        </article>
+      </section>
+
+      {/* Contact Form */}
+      <section className="mx-auto max-w-3xl px-4 py-12">
+        <h2 className="text-3xl font-bold tracking-tight text-brand-dark text-center mb-6">Contact Us</h2>
+        <form className="space-y-4" action="https://formspree.io/f/xqakzqed" method="POST">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="First Name" name="firstName" required />
+            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Last Name" name="lastName" required />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Phone" name="phone" />
+            <input className="border border-gray-300 rounded-md px-3 py-2" placeholder="Email" type="email" name="email" required />
+          </div>
+          <textarea className="border border-gray-300 rounded-md px-3 py-2 w-full min-h-40" placeholder="Message" name="message" required />
+          <button className="button-brand" type="submit">Send</button>
+        </form>
+      </section>
 
     </main>
   );
