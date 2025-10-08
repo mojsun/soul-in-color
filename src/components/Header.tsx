@@ -9,6 +9,7 @@ export default function Header() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!isHome) return;
@@ -38,7 +39,8 @@ export default function Header() {
             {siteConfig.companyName}
           </span>
         </Link>
-        <nav className="flex items-center gap-2 sm:gap-4">
+        {/* Desktop nav */}
+        <nav className="hidden sm:flex items-center gap-2 sm:gap-4">
           <Link href="/" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Home</Link>
           <Link href="/about" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>About</Link>
           <Link href="/events" className={`hover:underline underline-offset-4 hover:opacity-90 hover:text-white hover:font-bold text-xs sm:text-sm ${isHome && !scrolled ? "text-black" : "text-white"}`}>Events</Link>
@@ -53,7 +55,31 @@ export default function Header() {
             Tickets
           </a>
         </nav>
+        {/* Mobile hamburger */}
+        <button
+          aria-label="Toggle menu"
+          className="sm:hidden inline-flex items-center justify-center w-9 h-9 rounded-md border border-white/30 bg-transparent text-current"
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span className="sr-only">Menu</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+        </button>
       </div>
+      {/* Mobile menu panel */}
+      {menuOpen && (
+        <div className={`sm:hidden ${isHome && !scrolled ? "bg-black/70 text-white" : "bg-brand text-white"} border-t border-white/20`}> 
+          <div className="px-4 py-3 space-y-3">
+            <Link href="/" className="block" onClick={() => setMenuOpen(false)}>Home</Link>
+            <Link href="/about" className="block" onClick={() => setMenuOpen(false)}>About</Link>
+            <Link href="/events" className="block" onClick={() => setMenuOpen(false)}>Events</Link>
+            <Link href="/gallery" className="block" onClick={() => setMenuOpen(false)}>Gallery</Link>
+            <Link href="/contact" className="block" onClick={() => setMenuOpen(false)}>Contact</Link>
+            <a href={siteConfig.eventbriteUrl} target="_blank" rel="noopener noreferrer" className="block">Tickets</a>
+          </div>
+        </div>
+      )}
     </header>
   );
 } 
