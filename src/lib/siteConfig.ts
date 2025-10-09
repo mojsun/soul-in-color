@@ -39,7 +39,7 @@ export const siteConfig: SiteConfig = {
   },
   eventbriteUrl:
     process.env.NEXT_PUBLIC_EVENTBRITE_URL ||
-    "https://www.eventbrite.com/e/water-color-workshop-tickets-1573828506429?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=ebdsshcopyurl",
+    "https://www.eventbrite.com/e/halloween-face-art-party-tickets-1754407051719?aff=erelexpmlt",
 };
 
 export default siteConfig; 
