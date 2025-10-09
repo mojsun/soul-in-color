@@ -6,6 +6,7 @@ export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -16,16 +17,38 @@ export default function ChatWidget() {
     const email = String(formData.get("email") || "");
     const message = String(formData.get("message") || "");
     try {
+      setErrorMsg(null);
       setSubmitting(true);
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, message }),
-      });
-      const json = await res.json();
-      if (json?.ok) {
+      // Try local API first (works locally). In serverless deploys, fallback to Formspree.
+      let ok = false;
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message }),
+        });
+        const json = await res.json().catch(() => ({}));
+        ok = res.ok && Boolean((json as any).ok);
+      } catch {}
+
+      if (!ok) {
+        const fd = new FormData();
+        fd.append("name", name);
+        fd.append("email", email);
+        fd.append("message", message);
+        const r2 = await fetch("https://formspree.io/f/xqakzqed", {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: fd,
+        });
+        ok = r2.ok;
+      }
+
+      if (ok) {
         setSubmitted(true);
         form.reset();
+      } else {
+        setErrorMsg("Something went wrong. Please try again later.");
       }
     } finally {
       setSubmitting(false);
@@ -54,6 +77,9 @@ export default function ChatWidget() {
                 <input className="w-full border border-gray-300 rounded-md px-2 py-2" name="name" placeholder="Your name" />
                 <input className="w-full border border-gray-300 rounded-md px-2 py-2" name="email" type="email" placeholder="Email" required />
                 <textarea className="w-full border border-gray-300 rounded-md px-2 py-2 min-h-24" name="message" placeholder="Message" required />
+                {errorMsg && (
+                  <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded px-3 py-2">{errorMsg}</div>
+                )}
                 <div className="flex items-center justify-end gap-2">
                   <button type="button" className="button-outline-brand px-3 py-1.5" onClick={() => setOpen(false)}>Close</button>
                   <button type="submit" disabled={submitting} className="button-brand px-3 py-1.5">{submitting ? "Sending..." : "Send"}</button>
