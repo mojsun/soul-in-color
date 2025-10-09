@@ -23,21 +23,49 @@ export async function POST(req: NextRequest) {
       createdAt: new Date().toISOString(),
     };
 
-    const dataDir = path.join(process.cwd(), "data");
-    const filePath = path.join(dataDir, "chat-submissions.json");
-    try {
-      fs.mkdirSync(dataDir, { recursive: true });
-    } catch {}
+    // Save locally only during development (avoid serverless write in production)
+    if (process.env.NODE_ENV !== "production") {
+      const dataDir = path.join(process.cwd(), "data");
+      const filePath = path.join(dataDir, "chat-submissions.json");
+      try {
+        fs.mkdirSync(dataDir, { recursive: true });
+        let existing: ChatPayload[] = [];
+        try {
+          const raw = fs.readFileSync(filePath, "utf8");
+          existing = JSON.parse(raw);
+          if (!Array.isArray(existing)) existing = [];
+        } catch {}
+        existing.push(payload);
+        fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), "utf8");
+      } catch {}
+    }
 
-    let existing: ChatPayload[] = [];
-    try {
-      const raw = fs.readFileSync(filePath, "utf8");
-      existing = JSON.parse(raw);
-      if (!Array.isArray(existing)) existing = [];
-    } catch {}
+    // Forward to Formspree so production deployments succeed
+    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xqakzqed";
+    const url = `https://formspree.io/f/${formId}`;
+    const body = new URLSearchParams();
+    body.append("name", payload.name || "");
+    body.append("email", payload.email);
+    body.append("message", payload.message);
 
-    existing.push(payload);
-    fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), "utf8");
+    const rsp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: body.toString(),
+      // no-cache avoids 403s due to cached preflight anomalies
+      cache: "no-store",
+    });
+
+    if (!rsp.ok) {
+      let err: unknown;
+      try {
+        err = await rsp.json();
+      } catch {}
+      return NextResponse.json({ ok: false, error: err || "Form submit failed" }, { status: 502 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (_e) {
