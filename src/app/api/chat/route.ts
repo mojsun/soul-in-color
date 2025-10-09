@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Forward to Formspree so production deployments succeed
-    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xqakzqed";
+    const formId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mgvnnwvr";
     const url = `https://formspree.io/f/${formId}`;
     const body = new URLSearchParams();
     body.append("name", payload.name || "");

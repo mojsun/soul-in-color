@@ -19,46 +19,17 @@ export default function ChatWidget() {
     try {
       setErrorMsg(null);
       setSubmitting(true);
-      // Use local API on localhost; otherwise use Formspree in production
-      const isLocal = typeof window !== "undefined" && (/^localhost$/i.test(window.location.hostname) || window.location.hostname === "127.0.0.1");
       let ok = false;
-      if (isLocal) {
-        try {
-          const res = await fetch("/api/chat", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message }),
-          });
-          const json: unknown = await res.json().catch(() => ({}));
-          const maybe = json as { ok?: boolean };
-          ok = res.ok && Boolean(maybe?.ok);
-        } catch {}
-      }
-
-      if (!ok) {
-        const fd = new FormData();
-        fd.append("name", name);
-        fd.append("email", email);
-        fd.append("message", message);
-        try {
-          const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mgvnnwvr";
-          const r2 = await fetch(`https://formspree.io/f/${formspreeId}` as string, {
-            method: "POST",
-            headers: { Accept: "application/json" },
-            body: fd,
-          });
-          if (r2.ok) {
-            ok = true;
-          } else {
-            // Try to read JSON errors for more detail
-            const j2: unknown = await r2.json().catch(() => ({}));
-            const err = (j2 as { errors?: Array<{ message?: string }> })?.errors?.[0]?.message;
-            if (err) setErrorMsg(err);
-          }
-        } catch {
-          ok = false;
-        }
-      }
+      try {
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message }),
+        });
+        const json: unknown = await res.json().catch(() => ({}));
+        const maybe = json as { ok?: boolean };
+        ok = res.ok && Boolean(maybe?.ok);
+      } catch {}
 
       if (ok) {
         setSubmitted(true);
