@@ -41,7 +41,8 @@ export default function ChatWidget() {
         fd.append("email", email);
         fd.append("message", message);
         try {
-          const r2 = await fetch("https://formspree.io/f/xqakzqed", {
+          const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mgvnnwvr";
+          const r2 = await fetch(`https://formspree.io/f/${formspreeId}` as string, {
             method: "POST",
             headers: { Accept: "application/json" },
             body: fd,

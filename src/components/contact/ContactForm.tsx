@@ -26,7 +26,7 @@ export default function ContactForm() {
       setErrorMsg(null);
 
       // Always post directly to Formspree on this page for reliability
-      const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "xqakzqed";
+      const formspreeId = process.env.NEXT_PUBLIC_FORMSPREE_ID || "mgvnnwvr";
       const url = `https://formspree.io/f/${formspreeId}`;
       const body = new URLSearchParams();
       body.append("name", name);
