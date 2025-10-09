@@ -33,16 +33,18 @@ export default function Header() {
   }`;
   return (
     <header className={headerClassName}>
-      <div className="mx-auto max-w-6xl  flex items-center justify-between">
+      <div className="mx-auto max-w-6xl flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Image
-            src="/images/Copy-of-Soulincolor.png"
-            alt={siteConfig.companyName}
-            width={200}
-            height={56}
-            className="h-24 sm:h-32 w-auto"
-            priority
-          />
+          <div className="relative overflow-hidden h-12 sm:h-16 w-[200px] sm:w-[260px]" aria-label={siteConfig.companyName}>
+            <Image
+              src="/images/Copy-of-Soulincolor.png"
+              alt={siteConfig.companyName}
+              fill
+              className="object-contain"
+              priority
+              style={{ transform: "scale(1.35)" }}
+            />
+          </div>
         </Link>
         {/* Desktop nav */}
         <nav className="hidden sm:flex items-center gap-2 sm:gap-4">
