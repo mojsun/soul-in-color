@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import siteConfig from "@/lib/siteConfig";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const pathname = usePathname();
@@ -30,14 +31,18 @@ export default function Header() {
         : "bg-transparent text-black"
       : "bg-brand text-white border-b border-brand/40"
   }`;
-  const brandTextClass = isHome && !scrolled ? "text-white" : "text-[#8F79A1]";
   return (
     <header className={headerClassName}>
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
+      <div className="mx-auto max-w-6xl  flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className={`text-xl sm:text-2xl font-bold tracking-tight ${brandTextClass}`}>
-            {siteConfig.companyName}
-          </span>
+          <Image
+            src="/images/Copy-of-Soulincolor.png"
+            alt={siteConfig.companyName}
+            width={200}
+            height={56}
+            className="h-24 sm:h-32 w-auto"
+            priority
+          />
         </Link>
         {/* Desktop nav */}
         <nav className="hidden sm:flex items-center gap-2 sm:gap-4">
