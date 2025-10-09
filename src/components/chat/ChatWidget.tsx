@@ -27,8 +27,9 @@ export default function ChatWidget() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ name, email, message }),
         });
-        const json = await res.json().catch(() => ({}));
-        ok = res.ok && Boolean((json as any).ok);
+        const json: unknown = await res.json().catch(() => ({}));
+        const maybe = json as { ok?: boolean };
+        ok = res.ok && Boolean(maybe?.ok);
       } catch {}
 
       if (!ok) {

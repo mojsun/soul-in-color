@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
     fs.writeFileSync(filePath, JSON.stringify(existing, null, 2), "utf8");
 
     return NextResponse.json({ ok: true });
-  } catch (e) {
+  } catch (_e) {
     return NextResponse.json({ ok: false, error: "Invalid JSON" }, { status: 400 });
   }
 }
